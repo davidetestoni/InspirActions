@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31229.75
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspirActions", "InspirActions\InspirActions.csproj", "{5E40C966-3AB3-4296-A183-0773032D4433}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspirActions.Core", "InspirActions.Core\InspirActions.Core.csproj", "{6143CF2A-0572-40B2-BD91-D98DD3C4F62D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E40C966-3AB3-4296-A183-0773032D4433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E40C966-3AB3-4296-A183-0773032D4433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E40C966-3AB3-4296-A183-0773032D4433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E40C966-3AB3-4296-A183-0773032D4433}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6143CF2A-0572-40B2-BD91-D98DD3C4F62D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6143CF2A-0572-40B2-BD91-D98DD3C4F62D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6143CF2A-0572-40B2-BD91-D98DD3C4F62D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6143CF2A-0572-40B2-BD91-D98DD3C4F62D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9A3070B-67EC-405D-B140-A6E05EF45411}
+	EndGlobalSection
+EndGlobal

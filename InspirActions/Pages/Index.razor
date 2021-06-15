@@ -1,0 +1,29 @@
+﻿@page "/"
+
+@if (session is null)
+{
+    <EditForm Model="this">
+        <label>Pictures folder</label>
+        <InputText @bind-Value="picsFolder" />
+        <label>Tasks</label>
+        <InputNumber @bind-Value="numberOfTasks" />
+        <button class="btn btn-sm btn-success" @onclick="StartSession">Start</button>
+        <button class="btn btn-sm btn-primary" @onclick="EditTasks">Edit Tasks</button>
+    </EditForm>
+}
+else
+{
+    @if (session.Finished)
+    {
+        <div class="task-description">
+            <span class="task-description-text">THE END</span>
+        </div>
+    }
+    else
+    {
+        <img src="data:image/png;base64,@base64" class="fit" alt="background" />
+        <div class="task-description">
+            <span class="task-description-text">@currentText</span> 
+        </div>
+    }
+}
