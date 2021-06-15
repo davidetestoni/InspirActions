@@ -2,14 +2,26 @@
 
 @if (session is null)
 {
-    <EditForm Model="this">
-        <label>Pictures folder</label>
-        <InputText @bind-Value="picsFolder" />
-        <label>Tasks</label>
-        <InputNumber @bind-Value="numberOfTasks" />
-        <button class="btn btn-sm btn-success" @onclick="StartSession">Start</button>
-        <button class="btn btn-sm btn-primary" @onclick="EditTasks">Edit Tasks</button>
-    </EditForm>
+    <div class="p-3">
+        <EditForm Model="this">
+            <label>Pictures folder</label>
+            <InputText @bind-Value="picsFolder" />
+            <br />
+            <label>Tasks</label>
+            <InputNumber @bind-Value="numberOfTasks" />
+            <br />
+
+            @foreach (var category in categoryOptions)
+            {
+                <label>@category.Key</label>
+                <InputCheckbox @bind-Value="category.Value.Active" />
+                <br />
+            }
+
+            <button class="btn btn-sm btn-success" @onclick="StartSession">Start</button>
+            <button class="btn btn-sm btn-primary" @onclick="EditTasks">Edit Tasks</button>
+        </EditForm>
+    </div>
 }
 else
 {

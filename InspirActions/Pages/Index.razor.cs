@@ -3,7 +3,9 @@ using InspirActions.Core.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace InspirActions.Pages
@@ -15,15 +17,37 @@ namespace InspirActions.Pages
 
         private string picsFolder = "";
         private int numberOfTasks = 20;
+        private Dictionary<string, CategoryOptions> categoryOptions = new();
+        private List<AvailableTask> availableTasks = new();
         private Session session;
         private string base64 = "";
         private string currentText = "";
         private DotNetObjectReference<Index> reference;
 
+        protected override void OnInitialized()
+        {
+            availableTasks = TaskRepo.Load().ToList();
+            categoryOptions = availableTasks.Select(t => t.Category).Distinct()
+                .ToDictionary(c => c, c => new CategoryOptions { Active = true });
+        }
+
         private async Task StartSession()
         {
-            var pictures = PicturesLoader.LoadFromFolder(picsFolder);
-            session = new Session(pictures, TaskRepo.Load(), numberOfTasks);
+            if (string.IsNullOrWhiteSpace(picsFolder) || numberOfTasks < 1)
+            {
+                return;
+            }
+
+            var pictures = PicturesLoader.LoadFromFolder(picsFolder).ToList();
+            var options = new SessionOptions
+            {
+                Pictures = pictures,
+                AvailableTasks = availableTasks,
+                NumberOfTasks = numberOfTasks,
+                CategoryOptions = categoryOptions
+            };
+
+            session = new Session(options);
 
             await UpdateTask();
         }

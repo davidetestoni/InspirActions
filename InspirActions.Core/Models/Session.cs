@@ -12,13 +12,13 @@ namespace InspirActions.Core.Models
         public bool Finished { get; private set; } = false;
         public SessionTask CurrentTask => tasks[index];
 
-        public Session(IEnumerable<string> pictures, IEnumerable<AvailableTask> availableTasks, int numberOfTasks)
+        public Session(SessionOptions options)
         {
             // Initialize the tasks when the session is created
-            tasks = pictures.Take(numberOfTasks).Select(p => new SessionTask
+            tasks = options.Pictures.Take(options.NumberOfTasks).Select(p => new SessionTask
             {
                 Picture = p,
-                Task = availableTasks.Random()
+                Task = options.AvailableTasks.Where(t => options.CategoryOptions[t.Category].Active).Random()
             }).ToList();
         }
 

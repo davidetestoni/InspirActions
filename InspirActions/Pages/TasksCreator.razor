@@ -1,21 +1,23 @@
 ﻿@page "/tasks"
 
-<h1>Manage your tasks here</h1>
+<div class="p-3">
+    <h1>Manage your tasks here</h1>
 
-@foreach (var task in tasks)
-{
-    <EditForm Model="task">
-        <label>Short Name</label>
-        <InputText @bind-Value="task.ShortName" />
-        <label>Category</label>
-        <InputText @bind-Value="task.Category" />
-        <label>Description</label>
-        <InputText @bind-Value="task.Description" />
-        <label>Difficulty</label>
-        <InputNumber @bind-Value="task.Difficulty" />
-        <button class="btn btn-sm btn-danger"><span class="oi oi-x"></span></button>
-    </EditForm>
-}
+    @foreach (var task in tasks)
+    {
+        <EditForm Model="task">
+            <label>Short Name</label>
+            <InputText @bind-Value="task.ShortName" />
+            <label>Category</label>
+            <InputText @bind-Value="task.Category" />
+            <label>Description</label>
+            <InputText @bind-Value="task.Description" class="w-25" />
+            <label>Difficulty</label>
+            <InputNumber @bind-Value="task.Difficulty" />
+            <button class="btn btn-sm btn-danger" @onclick="() => tasks.Remove(task)"><span class="oi oi-x"></span></button>
+        </EditForm>
+    }
 
-<button class="btn btn-sm btn-primary" @onclick="AddNew"><span class="oi oi-plus"></span> New</button>
-<button class="btn btn-sm btn-success" @onclick="Save">Save</button>
+    <button class="btn btn-sm btn-primary" @onclick="AddNew"><span class="oi oi-plus"></span> New</button>
+    <button class="btn btn-sm btn-success" @onclick="Save">Save</button>
+</div>

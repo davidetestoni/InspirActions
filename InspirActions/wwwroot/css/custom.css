@@ -19,6 +19,10 @@
     object-fit: cover;
 }
 
+.page {
+    flex-direction: column !important;
+}
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 ::-webkit-scrollbar {
     display: none;
