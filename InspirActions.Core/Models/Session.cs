@@ -1,4 +1,4 @@
-﻿using InspirActions.Core.Extensions;
+﻿using InspirActions.Core.Factories;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,6 +6,7 @@ namespace InspirActions.Core.Models
 {
     public class Session
     {
+        private readonly SessionOptions options;
         private readonly List<SessionTask> tasks;
         private int index = 0;
 
@@ -14,12 +15,14 @@ namespace InspirActions.Core.Models
 
         public Session(SessionOptions options)
         {
+            this.options = options;
+
+            var taskFactory = new SessionTaskFactory(options.Greetings, options.Names, 
+                options.AvailableTasks, options.CategoryOptions);
+
             // Initialize the tasks when the session is created
-            tasks = options.Pictures.Take(options.NumberOfTasks).Select(p => new SessionTask
-            {
-                Picture = p,
-                Task = options.AvailableTasks.Where(t => options.CategoryOptions[t.Category].Active).Random()
-            }).ToList();
+            tasks = options.Pictures.Take(options.NumberOfTasks)
+                .Select(p => taskFactory.Generate(p)).ToList();
         }
 
         public void NextTask()

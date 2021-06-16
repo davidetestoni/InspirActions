@@ -7,13 +7,20 @@
     {
         <EditForm Model="task">
             <label>Short Name</label>
-            <InputText @bind-Value="task.ShortName" />
+            <InputText @bind-Value="task.ShortName" style="width: 250px" />
             <label>Category</label>
-            <InputText @bind-Value="task.Category" />
+            <InputText @bind-Value="task.Category" style="width: 100px" />
             <label>Description</label>
-            <InputText @bind-Value="task.Description" class="w-25" />
+            <InputText @bind-Value="task.Description" style="width: 800px" />
             <label>Difficulty</label>
-            <InputNumber @bind-Value="task.Difficulty" />
+            <InputNumber @bind-Value="task.Difficulty" style="width: 50px" />
+            <label>Duration (s)</label>
+            <InputNumber @bind-Value="task.Duration" style="width: 50px" />
+            <label>Reps</label>
+            <InputNumber @bind-Value="task.Repetitions" style="width: 50px" />
+
+            <button class="btn btn-sm btn-primary" @onclick="() => MoveUp(task)"><span class="oi oi-arrow-top"></span></button>
+            <button class="btn btn-sm btn-primary" @onclick="() => MoveDown(task)"><span class="oi oi-arrow-bottom"></span></button>
             <button class="btn btn-sm btn-danger" @onclick="() => tasks.Remove(task)"><span class="oi oi-x"></span></button>
         </EditForm>
     }

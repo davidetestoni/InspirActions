@@ -14,10 +14,39 @@ namespace InspirActions.Pages
         private List<AvailableTask> tasks = new();
 
         protected override void OnInitialized()
-            => tasks = TaskRepo.Load().ToList();
+        {
+            tasks = TaskRepo.Load().ToList();
+            StateHasChanged();
+        }
 
         private void AddNew()
             => tasks.Add(new AvailableTask());
+
+        private void MoveUp(AvailableTask task)
+        {
+            var index = tasks.IndexOf(task);
+
+            if (index == 0)
+            {
+                return;
+            }
+
+            tasks[index] = tasks[index - 1];
+            tasks[index - 1] = task;
+        }
+
+        private void MoveDown(AvailableTask task)
+        {
+            var index = tasks.IndexOf(task);
+
+            if (index == tasks.Count)
+            {
+                return;
+            }
+
+            tasks[index] = tasks[index + 1];
+            tasks[index + 1] = task;
+        }
 
         private void Save()
         {

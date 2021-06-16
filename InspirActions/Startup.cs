@@ -23,7 +23,9 @@ namespace InspirActions
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            services.AddSingleton<TaskRepository>();
+            services.AddSingleton(_ => new TaskRepository("Resources/tasks.json"));
+            services.AddSingleton(_ => new GreetingRepository("Resources/greetings.json"));
+            services.AddSingleton(_ => new NameRepository("Resources/names.json"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

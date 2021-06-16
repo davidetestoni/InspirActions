@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace InspirActions.Core.Helpers
 {
@@ -25,6 +26,7 @@ namespace InspirActions.Core.Helpers
                 : Array.Empty<AvailableTask>();
 
         public void Save(IEnumerable<AvailableTask> tasks)
-            => File.WriteAllText(fileName, JsonConvert.SerializeObject(tasks, jsonSettings));
+            => File.WriteAllText(fileName, JsonConvert.SerializeObject(tasks
+                .Where(t => !string.IsNullOrEmpty(t.ShortName) && !string.IsNullOrEmpty(t.Category)), jsonSettings));
     }
 }

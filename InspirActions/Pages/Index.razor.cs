@@ -13,12 +13,16 @@ namespace InspirActions.Pages
     public partial class Index : IDisposable
     {
         [Inject] private TaskRepository TaskRepo { get; set; }
+        [Inject] private GreetingRepository GreetingRepo { get; set; }
+        [Inject] private NameRepository NameRepo { get; set; }
         [Inject] private NavigationManager NavManager { get; set; }
 
         private string picsFolder = "";
         private int numberOfTasks = 20;
         private Dictionary<string, CategoryOptions> categoryOptions = new();
         private List<AvailableTask> availableTasks = new();
+        private List<string> greetings = new();
+        private List<string> names = new();
         private Session session;
         private string base64 = "";
         private string currentText = "";
@@ -27,7 +31,11 @@ namespace InspirActions.Pages
         protected override void OnInitialized()
         {
             availableTasks = TaskRepo.Load().ToList();
-            categoryOptions = availableTasks.Select(t => t.Category).Distinct()
+            greetings = GreetingRepo.Load().ToList();
+            names = NameRepo.Load().ToList();
+
+            categoryOptions = availableTasks.Select(t => t.Category)
+                .Where(c => !string.IsNullOrEmpty(c)).Distinct()
                 .ToDictionary(c => c, c => new CategoryOptions { Active = true });
         }
 
@@ -43,6 +51,8 @@ namespace InspirActions.Pages
             {
                 Pictures = pictures,
                 AvailableTasks = availableTasks,
+                Greetings = greetings,
+                Names = names,
                 NumberOfTasks = numberOfTasks,
                 CategoryOptions = categoryOptions
             };
