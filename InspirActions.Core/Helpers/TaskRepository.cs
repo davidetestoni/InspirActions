@@ -26,7 +26,10 @@ namespace InspirActions.Core.Helpers
                 : Array.Empty<AvailableTask>();
 
         public void Save(IEnumerable<AvailableTask> tasks)
-            => File.WriteAllText(fileName, JsonConvert.SerializeObject(tasks
+        {
+            Directory.CreateDirectory("Resources");
+            File.WriteAllText(fileName, JsonConvert.SerializeObject(tasks
                 .Where(t => !string.IsNullOrEmpty(t.ShortName) && !string.IsNullOrEmpty(t.Category)), jsonSettings));
+        }
     }
 }

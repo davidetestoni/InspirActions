@@ -25,7 +25,10 @@ namespace InspirActions.Core.Helpers
                 : Array.Empty<string>();
 
         public void Save(IEnumerable<string> names)
-            => File.WriteAllText(fileName, JsonConvert.SerializeObject(names
+        {
+            Directory.CreateDirectory("Resources");
+            File.WriteAllText(fileName, JsonConvert.SerializeObject(names
                 .Where(n => !string.IsNullOrEmpty(n)), jsonSettings));
+        }
     }
 }
